@@ -1,0 +1,63 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Dashboard - My App
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.css")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js")
+  body
+    .flex.bg-gray-100.w-full
+      //- Sidebar (visible on large screens, hidden on small screens)
+      aside(class= 'w-64 bg-gray-800 text-white flex-shrink-0 fixed h-full hidden md:block')#sidebar
+        .h-full.px-4.py-6
+          h2.text-xl.font-bold.mb-4 Dashboard
+          ul
+            li.mb-3
+              a(href="/admin/dashboard" class="block px-3 py-2 hover:bg-gray-700 rounded-md") Dashboard
+            li.mb-3
+              a(href="/admin/profile" class="block px-3 py-2 hover:bg-gray-700 rounded-md") Profile
+            li.mb-3
+              a(href="/admin/settings" class="block px-3 py-2 hover:bg-gray-700 rounded-md") Settings
+            li
+              a(href="/admin/logout" class="block px-3 py-2 bg-red-500 hover:bg-red-600 rounded-md") Logout
+      
+      //- Main content container
+      div(class='flex-1 md:ml-64 flex flex-col w-full')
+    
+        header.bg-white.shadow.px-6.py-4
+          .flex.items-center.justify-between
+            .flex.items-center.justify-center
+              button(class='h-10 w-10 text-white rounded-md md:hidden')#buttonToggle
+                span(class='block w-6 h-0.5 bg-black mb-1')
+                span(class='block w-6 h-0.5 bg-black mb-1') 
+                span(class='block w-6 h-0.5 bg-black')
+              h1.text-xl.font-semibold.text-gray-800 Dashboard
+
+            //- Placeholder for user info or other controls
+            div
+              span.text-gray-600 Hello, #{loggedUser ? loggedUser.firstName : 'User'}!
+              a(href="/admin/logout" class="ml-4 text-blue-500 hover:underline") Logout
+        
+        //- Main content area
+        main.flex-grow.p-6.overflow-auto
+          block content
+
+
+    
+    //- Mobile Sidebar (initially hidden, will toggle on small screens)
+    div(class='fixed top-0 left-0 w-64 h-full bg-gray-800 text-white transform -translate-x-full transition-transform duration-300 md:hidden')#mobileSidebar
+      .h-full.px-4.py-6
+        h2.text-xl.font-bold.mb-4 Dashboard
+        ul
+          li.mb-3
+            a(href="/admin/dashboard" class="block px-3 py-2 hover:bg-gray-700 rounded-md") Dashboard
+          li.mb-3
+            a(href="/admin/profile" class="block px-3 py-2 hover:bg-gray-700 rounded-md") Profile
+          li.mb-3
+            a(href="/admin/settings" class="block px-3 py-2 hover:bg-gray-700 rounded-md") Settings
+          li
+            a(href="/admin/logout" class="block px-3 py-2 bg-red-500 hover:bg-red-600 rounded-md") Logout
+
+
